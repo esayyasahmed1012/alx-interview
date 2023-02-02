@@ -3,6 +3,10 @@
 You have n number of locked boxes in front of you. Each box is numbered sequentially from 0 to n - 1 and each box may contain keys to the other boxes.
 """
 def canUnlockAll(boxes):
+    """
+    Function used to check a list type and length to invoke two for iterations      one traverse thae list and the other to compare if key is idx or not in 
+    in order to open
+    """
     if type(boxes) is not list:
         return False
     elif (len(boxes)) == 0:
@@ -16,3 +20,4 @@ def canUnlockAll(boxes):
         if boxes_checked is False:
             return boxes_checked
     return True
+
