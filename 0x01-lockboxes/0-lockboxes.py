@@ -10,16 +10,14 @@ def canUnlockAll(boxes):
      A key with the same number as a box opens that box
     You can assume all keys will be positive integers
     """
-    if type(boxes) is not list:
+    if not boxes or type(boxes) is not list:
         return False
-    elif (len(boxes)) == 0:
-        return False
-    for i in range(1, len(boxes) - 1):
-        boxes_checked = False
-        for j in range(len(boxes)):
-            boxes_checked = i in boxes[j] and i != j
-            if boxes_checked:
-                break
-        if boxes_checked is False:
-            return boxes_checked
-    return True;
+
+    unlocked = [0]
+    for n in unlocked:
+        for key in boxes[n]:
+            if key not in unlocked and key < len(boxes):
+                unlocked.append(key)
+    if len(unlocked) == len(boxes):
+        return True
+    return False
