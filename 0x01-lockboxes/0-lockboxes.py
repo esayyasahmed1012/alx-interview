@@ -9,9 +9,9 @@ and each box may contain keys to the other boxes.
 
 def canUnlockAll(boxes):
     """
-    Function that checks with boolean value if the list type and
-    length to invoke two for iterations one to traverse the list
-    and the other to compaer if key is idx or not in order to open
+    Function used to check with boolean value if the list type and
+    length to invoke two for iterations one to travers the list and the
+    other to compare if key is idx. or not.
     """
     if type(boxes) is not list:
         return False
