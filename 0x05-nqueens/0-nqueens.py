@@ -1,54 +1,71 @@
 #!/usr/bin/python3
-"""Solving N Queens with Backtracing"""
+"""
+Script that solves the N queens problem based on the general Backtracking
+algorithm.
+
+This is:
+procedure bt(c) is
+    if reject(P, c) then return
+    if accept(P, c) then output(P, c)
+    s  first(P, c)
+    while s  NULL do
+        bt(s)
+        s  next(P, s)
+"""
 import sys
 
 
-def nqueens(n, y, board):
+def valid_pos(solution, pos):
     """
-    Method: nqueens - place n queens
-            on an n by n board so that
-            no queens are attacking any
-            others.
-    Parameters: n is an int that sets
-                board size and # of queens
-    Return: All possible solutions to
-            placement, in list of lists form
+    Function that verifies if the position is valid
     """
-    for x in range(n):
-        hold = 0
-        for q in board:
-            if x == q[1]:
-                hold = 1
-                break
-            if y - x == q[0] - q[1]:
-                hold = 1
-                break
-            if x - q[1] == q[0] - y:
-                hold = 1
-                break
-        if hold == 0:
-            board.append([y, x])
-            if y != n - 1:
-                nqueens(n, y + 1, board)
-            else:
-                print(board)
-            del board[-1]
+    for queen in solution:
+        if queen[1] == pos[1]:
+            return False
+        if (queen[0] + queen[1]) == (pos[0] + pos[1]):
+            return False
+        if (queen[0] - queen[1]) == (pos[0] - pos[1]):
+            return False
+    return True
 
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: nqueens N")
-        sys.exit(1)
-    try:
-        n = int(sys.argv[1])
-    except Exception:
-        print('N must be a number')
-        sys.exit(1)
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
+def solve_queens(row, n, solution):
+    """
+    Function that finds the solution recursively, from the root down
+    """
+    if (row == n):
+        print(solution)
+    else:
+        for col in range(n):
+            pos = [row, col]
+            if valid_pos(solution, pos):
+                solution.append(pos)
+                solve_queens(row + 1, n, solution)
+                solution.remove(pos)
 
-    nqueens(n, 0, [])
+
+def main(n):
+    """
+    Main function
+    """
+    solution = []
+    """ From root(0) down(n) """
+    solve_queens(0, n, solution)
 
 if __name__ == '__main__':
-    main()
+    """ Validate the arguments from OS """
+    if len(sys.argv) != 2:
+        print('Usage: nqueens N')
+        sys.exit(1)
+    try:
+        i = int(sys.argv[1])
+    except BaseException:
+        print('N must be a number')
+        sys.exit(1)
+    i = int(sys.argv[1])
+    if i < 4:
+        print('N must be at least 4')
+        sys.exit(1)
+
+    """ Calling the main function """
+    main(i)
