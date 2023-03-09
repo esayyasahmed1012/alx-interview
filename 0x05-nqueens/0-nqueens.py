@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" N queen backtracking """
+""" N queens backtracking """
 import sys
 
 
